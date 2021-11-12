@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <style type="text/css">
+        body {
+            margin: 0;
+            background-color: #CAE3FF;
+        }
+    
+        .logo {
+            text-align: center;
+            margin-top: 25px;
+        }
+    
+        .logo_img {
+            width: 450px;
+        }
+    
+        .nav-container {
+            text-align: center;
+            width: 100%;
+            margin: 0;
+            margin-left: 40%;
+            padding: 0;
+            list-style-type: none;
+        }
+    
+        .nav-item,
+        .nameH5 {
+            padding: 15px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+            margin: auto 0;
+        }
+    
+    
+        .nav-item button {
+            border: none;
+            border-radius:5px;
+            width: 100px;
+            height: 40px;
+            margin-right: 10px;
+            background-color: white; 
+        }
+    
+        .write button {
+            position:absolute;
+            top:380px;
+            left:1280px;
+            background-color: #27B5F2;
+            border: none;
+            width: 100px;
+            height: 40px;
+        }
+    
+        input{
+            width:500px;
+            height:35px;
+            margin-top:5px;
+        }
+
+        textarea{
+            width:500px;
+            height: 300px;
+        }
+    
+        form{
+            text-align: center;
+        }
+
+        h1{
+            text-align: center;
+        }
+
+        .end{
+            background-color: #27B5F2;
+            border: none;
+            width: 130px;
+            height: 40px;
+            border-radius: 5px;
+        }
+    </style>
+
+<body>
+    <div class="logo">
+       <a href="{% url 'main' %}"><img class="logo_img" src="{% static 'images/logo.png'%}"></a>
+       </div>
+       <nav>
+           <div class="nav-container">
+           <!-- <a class="nav-item" href="{% url 'review' %}">리뷰 확인</a> -->
+           {% if user.is_authenticated %}
+           <h5 class="nameH5">
+                   <strong style="font-size: 17px; color:lightslategrey;">
+                       {{user.username}} 님
+                   </strong>
+               </h5>
+                   <a class="nav-item" href="{% url 'logout' %}"><button type="button">로그아웃</button></a>
+               {% else %}
+               <a class="nav-item" href="{% url 'login' %}"><button type="button">로그인</button></a>
+               <a class="nav-item" href="{% url 'signup' %}"><button type="button">회원가입</button></a>
+               {% endif %}
+           </div>
+       </nav>
+
+    <h1> 화장실 리뷰 작성하기 </h1>
+
+    <form action ='{%url "create"%}' method = "POST">
+        {%csrf_token%}
+            <p><input type="text" placeholder="제목" name="title"></p>
+            <p><input type = "text" placeholder="역 이름" name = "name"></p>
+            <textarea name="body" placeholder="내용입력" id="" cols="30" rows="10"></textarea>
+            <br><br>
+            <input type="file" name ="imgs">
+            <br><br>
+            <button class="end" type = "submit">작성 완료</button>
+            <!--<a href = "{% url 'review'%}">취소</a>-->
+    </form>
+</body>
+</html>

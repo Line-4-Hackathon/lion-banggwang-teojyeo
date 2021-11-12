@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style type="text/css">
+        body{
+            text-align:center;
+            background-color: #CAE3FF;
+        }
+        .logo_img {
+            width:300px;
+        }
+        .container{
+            position:absolute;
+            left:700px;
+            top:280px;
+        }
+        .logo{
+            position:absolute;
+            left:705px;
+            top:145px;
+        }
+        input{
+            width:300px;
+            height:35px;
+            margin-top:15px;
+            border-radius: 5px;
+        }
+        .btn {
+            width:305px;
+            height:40px;
+            margin-top:10px;
+            background-color:#27B5F2;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <a href="{% url 'main' %}"><img class="logo_img" src="{% static 'images/logo.png'%}"></a>
+        </div>
+    </nav>
+    <div class = "container">
+        <form action = "{% url 'login'%}" method = "POST">
+            {% csrf_token %}
+            <input name="username" placeholder="ID / EMAIL" type = "text">
+            <br>
+            <input name ="password" placeholder="PASSWORD" type ="password">
+            <br><br>
+            <input type="submit" class="btn" value = "LOGIN">
+            <br><br>
+            회원이 아니신가요? &nbsp;
+            <a href="{% url 'signup' %}">회원가입하기</a>
+        </form>
+    </div>
+</body>

@@ -1,0 +1,9 @@
+<h1>리뷰 수정하기</h1>
+
+<form action="{%url 'update' rev.id%}" method = "POST">
+    {%csrf_token%}
+    <p>제목: <input type="text" value = "{{rev.title}}"></p>
+    <p>작성자: <input type = "text" value = "{{rev.writer}}"></p>
+    리뷰 : <textarea name = "body" cols="30" rows="10" value = "{{rev.body}}"> </textarea>
+    <!-- <button type = "submit">수정</button> -->
+</form>

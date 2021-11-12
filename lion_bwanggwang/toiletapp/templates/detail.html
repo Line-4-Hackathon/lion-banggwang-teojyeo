@@ -1,0 +1,137 @@
+{% load static %}
+
+<style type="text/css">
+    body {
+        margin: 0;
+        background-color: #CAE3FF;
+    }
+
+    .logo {
+        text-align: center;
+        margin-top: 25px;
+    }
+
+    .logo_img {
+        width: 450px;
+    }
+
+    .nav-container {
+        text-align: center;
+        width: 100%;
+        margin: 0;
+        margin-left: 40%;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .nav-item,
+    .nameH5 {
+        padding: 15px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        margin: auto 0;
+    }
+
+
+    .nav-item button {
+            border: none;
+            border-radius:5px;
+            width: 100px;
+            height: 40px;
+            margin-right: 10px;
+            background-color: white;
+    }
+
+    .write button {
+        position:absolute;
+        top:330px;
+        left:1280px;
+        background-color: #27B5F2;
+        border: none;
+        width: 100px;
+        height: 40px;
+    }
+
+    .box {      
+        margin: 20px auto;
+        border-radius: 20px;
+        width: 60%;
+        padding: 50px;
+        box-shadow: 0px 0px 10px #000;
+    }
+
+    h1{
+        text-align: center;
+    }
+
+    .detail{
+        text-align:center;
+        background-color: white;
+        width: 700px;
+        height: 430px;
+        border-radius: 20px;
+        margin-left: 520px;
+    }
+
+    .container{
+        margin-top:10px;
+        margin-left:530px;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>detail page</title>
+</head>
+
+<body>
+    <div class="logo">
+        <a href="{% url 'main' %}"><img class="logo_img" src="{% static 'images/logo.png'%}"></a>
+    </div>
+    <nav>
+        <div class="nav-container">
+        <!-- <a class="nav-item" href="{% url 'review' %}">리뷰 확인</a> -->
+        {% if user.is_authenticated %}
+        <h5 class="nameH5">
+                <strong style="font-size: 17px; color:lightslategrey;">
+                    {{user.username}} 님
+                </strong>
+        </h5>
+        {% endif %}
+        </div>
+    </nav>
+
+    <div class="detail">
+        <h1><strong>노원역 화장실</strong></h1>
+        <br>
+        지하철인지 호텔인지 헷갈릴 정도로 깨끗하고 예뻤네요~ 최고! :D 
+        <br><br>
+        <img src = "{% static 'images/5.png'%}" width = "200px">
+        <br><br>
+        <a href = "{% url 'review' %}"> 돌아가기 </a>
+        <a href = "#">수정</a>
+        <a href = "#">삭제</a>
+    </div>
+    <div class="container">
+        <!--생략-->
+        댓글 : 
+        {% for com in coms %}
+        익명
+        내용: 공감!
+        <br>
+        {% endfor %}
+      
+        <br><br>
+        댓글 달기 : 
+        <form method="POST" action ='{%url "detail_com"%}'>
+          {% csrf_token %}
+          <input name="body" type="text" value="">
+          <input class="btn btn-primary" type="submit" value="저장">
+        </form>
+      
+      </div>
+</body>

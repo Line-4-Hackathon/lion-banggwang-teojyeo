@@ -1,0 +1,121 @@
+{% load static %}
+<style type="text/css">
+    body {
+        margin: 0;
+        background-color: #CAE3FF;
+    }
+
+    .logo {
+        text-align: center;
+        margin-top: 25px;
+    }
+
+    .logo_img {
+        width: 450px;
+    }
+
+    .nav-container {
+        text-align: center;
+        width: 100%;
+        margin: 0;
+        margin-left: 40%;
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .nav-item,
+    .nameH5 {
+        padding: 15px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        margin: auto 0;
+    }
+
+
+    .nav-item button {
+            border: none;
+            border-radius:5px;
+            width: 100px;
+            height: 40px;
+            margin-right: 10px;
+            background-color: white;
+    }
+
+    .write button {
+        position:absolute;
+        top:330px;
+        left:1280px;
+        background-color: #27B5F2;
+        border: none;
+        width: 100px;
+        height: 40px;
+    }
+
+    .box {      
+        margin: 20px auto;
+        border-radius: 20px;
+        width: 60%;
+        padding: 50px;
+        box-shadow: 0px 0px 10px #000;
+    }
+
+    h1{
+        text-align: center;
+    }
+</style>
+<body>
+     <div class="logo">
+        <a href="{% url 'main' %}"><img class="logo_img" src="{% static 'images/logo.png'%}"></a>
+        </div>
+        <nav>
+            <div class="nav-container">
+            <!-- <a class="nav-item" href="{% url 'review' %}">리뷰 확인</a> -->
+            {% if user.is_authenticated %}
+            <h5 class="nameH5">
+                    <strong style="font-size: 17px; color:lightslategrey;">
+                        {{user.username}} 님
+                    </strong>
+                </h5>
+                    <a class="nav-item" href="{% url 'logout' %}"><button type="button">로그아웃</button></a>
+                {% else %}
+                <a class="nav-item" href="{% url 'signup' %}"><button type="button">회원가입</button></a>
+                <a class="nav-item" href="{% url 'login' %}"><button type="button">로그인</button></a>
+                {% endif %}
+            </div>
+        </nav>
+    <h1>리뷰 확인하기</h1>
+    <div class="box">
+            <h3><strong>노원역 화장실</strong></h3>
+            <p>지하철인지 호텔인지 헷갈릴 정도로 깨끗하고 예뻤네요~ 최고! :D 
+                <br><br><a href = "{% url 'detail' %}"> 자세히 보기 </a> </p>
+            <img src = "{% static 'images/5.png'%}" width="200px">
+            <br>
+            <br>
+    </div>
+    <div class="box">
+        <h3><strong>삼각지역</strong></h3>
+        <p>되게 깔끔합니다! 청소하시는 아주머니께서 깨끗하게 청소해주십니다 <br><br> <a href = "#"> 자세히 보기 </a> </p>
+        <img src = "{% static 'images/1.png'%}" width="200px">
+        <br>
+        <br>
+    </div>
+    <div class="box">
+        <h3><strong>동작역 화장실</strong></h3>
+        <p>휴지없음; 응아하려다가 놀래서 바지 올림 <br><br> <a href = "#"> 자세히 보기 </a> </p>
+        <img src = "{% static 'images/2.png'%}" width="200px">
+        <br>
+        <br>
+    </div>
+    <div class="box">
+        <h3><strong>사당역 화장실</strong></h3>
+        <p>그냥 그럼 <br><br> <a href = "#"> 자세히 보기 </a> </p>
+        <img src = "{% static 'images/3.png'%}" width="200px">
+        <br>
+        <br>
+    </div>
+        {% if user.is_authenticated %}
+        <a class="write" href="{% url 'new' %}"><button type="button">리뷰작성하기</button></a>
+        {%endif%}
+</body>

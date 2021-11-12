@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style type="text/css">
+        body{
+            text-align:center;
+            background-color: #CAE3FF;
+        }
+        .logo_img {
+            width:300px;
+        }
+        .container{
+            position:absolute;
+            left:700px;
+            top:270px;
+        }
+        .logo{
+            position:absolute;
+            left:705px;
+            top:145px;
+        }
+        input{
+            width:300px;
+            height:35px;
+            margin-top:15px;
+            border-radius: 5px;
+        }
+        .btn {
+            width:305px;
+            height:40px;
+            margin-top:10px;
+            background-color:#27B5F2;
+        }
+    </style>
+</head>
+
+<body>
+<div class="logo">
+    <a href="{% url 'main' %}"><img class="logo_img" src="{% static 'images/logo.png'%}"></a>
+</div>
+<div class='container'>
+    <form action="{% url 'signup'%}" method = "POST">
+        {% csrf_token %}
+        <input name='username' placeholder='NAME' type='text'>
+        <br>
+        <input name='nickname' placeholder='NICKNAME' type='text'>
+        <br>
+        <input name='name' placeholder='ID / E-MAIL' type='text'>
+        <br>
+        <input name='password1' placeholder="PASSWORD" type='password'>
+        <br>
+        <input name='password2' placeholder="PASSWORD CONFIRM" type='password'>
+        <br><br>
+        <input type='submit' class='btn' value='SIGN UP'>
+        <br><br>
+        이미 회원이신가요? 
+        <a href="{% url 'login' %}">로그인하기</a>
+    </form>
+</div>
+</body>
